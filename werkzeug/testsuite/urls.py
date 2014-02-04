@@ -221,6 +221,18 @@ class URLsTestCase(WerkzeugTestCase):
         self.assert_strict_equal(rv.query, 'x=y')
         self.assert_strict_equal(rv.fragment, 'frag')
 
+        rv = urls.url_parse('/123?x=y#frag')
+        self.assert_strict_equal(rv.scheme, '')
+        self.assert_strict_equal(rv.path, '/123')
+        self.assert_strict_equal(rv.query, 'x=y')
+        self.assert_strict_equal(rv.fragment, 'frag')
+
+        rv = urls.url_parse('////123?x=y#frag')
+        self.assert_strict_equal(rv.scheme, '')
+        self.assert_strict_equal(rv.path, '////123')
+        self.assert_strict_equal(rv.query, 'x=y')
+        self.assert_strict_equal(rv.fragment, 'frag')
+
         rv = urls.url_parse(u'http://\N{SNOWMAN}.com/')
         self.assert_strict_equal(rv.host, u'\N{SNOWMAN}.com')
         self.assert_strict_equal(rv.ascii_host, 'xn--n3h.com')

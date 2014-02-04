@@ -351,7 +351,7 @@ def url_parse(url, scheme=None, allow_fragments=True):
             # not a port number
             scheme, url = url[:i].lower(), rest
 
-    if url[:2] == s('//'):
+    if scheme and url[:2] == s('//'):
         delim = len(url)
         for c in s('/?#'):
             wdelim = url.find(c, 2)
